@@ -118,8 +118,7 @@ void q4(){
         {                        // child
 
             execlp(buf, buf, NULL);
-            sleep(30);
-            exit(EXIT_SUCCESS);
+            exit(EXIT_FAILURE);
         }
         else if (pid > 0)         //father
         {
