@@ -1,6 +1,8 @@
-# TP1 : Programmation système	
+# TP1 : Programmation système			Vincent Lakhmeche	
 
-## Enseash
+## Ensea in the Shell
+
+
 
 
 
@@ -31,3 +33,28 @@ Q5)
 
 
 ![image-20231129172535584](/home/vincent/snap/typora/86/.config/Typora/typora-user-images/image-20231129172535584.png)
+
+Q6) 
+
+
+
+
+
+
+
+Q7) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
