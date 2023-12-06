@@ -5,10 +5,14 @@
 #include <string.h>
 #include <wait.h>
 #include <time.h>
-#define READNUMER 300
+
+//#define READNUMER 40
 #define NANOSECOND 1000000000.
+#define READPARAM 10
+#define READNUMER 300
+
 char *enseash = "enseash% ";
-char * welcome  = "Bienvenue dans le Shell ENSEA.\n Pour quitter, tapez 'exit'.\n enseash % ";
+char * welcome  = "Bienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\n";
 
 void q1(){
     
@@ -154,7 +158,7 @@ void q4(){
 void q5(){
 
 
-#define READNUMER 40
+//#define READNUMER 40
 
 
     ssize_t nread;
@@ -232,7 +236,7 @@ void q5(){
 
             sprintf(string_accum, "|%lfs] %% ", accum);
             //write(STDOUT_FILENO, string_accum, strlen(string_accum));
-
+ 
             sprintf(enseash2, "enseash");
             strcat(enseash2, string_status_number);
             strcat(enseash2, string_accum);
@@ -245,6 +249,119 @@ void q5(){
 
 }
 
+void q6 ()
+{
+    ssize_t nread;
+    char buf[READNUMER];
+    size_t len = 0;
+    int status;
+    int status_number = 1;
+    char status_buf[READNUMER] = {0};
+    char enseash2[READNUMER] = "enseash ";
+    char string_status_number[READNUMER];
+    char *enseash = "enseash% ";
+
+    // question5 variable
+    struct timespec start, stop;
+    double accum;
+    char string_accum[READNUMER];
+
+    // question 6  variable
+    const char *separators = " ";
+    char *strToken;
+
+    char *buf_save[READNUMER];
+    int buf_count = 0;
+
+    write(STDOUT_FILENO, enseash, strlen(enseash));
+
+    pid_t pid, wpid;
+    while (1)
+    {
+        char *argument_list[10] = {NULL}; // NULL terminated array of char* strings
+        int buf_count = 0;
+        int end = read(STDIN_FILENO, buf, 300);
+        if (end > 0)
+        {
+            buf[end - 1] = '\0';
+        }
+    
+        strToken = strtok(buf, separators);
+        
+        while (strToken != NULL) 
+        {
+            argument_list[buf_count] = strToken;
+            buf_count++;
+            strToken = strtok(NULL, separators);
+        }
+
+        if (strncmp(buf, "exit", 4) == 0 || (end == 0))
+        {
+            write(STDOUT_FILENO, "Bye bye...", strlen("Bye bye..."));
+            exit(0);
+        }
+
+        if (clock_gettime(CLOCK_REALTIME, &start) == -1) // start time
+        {
+            perror("clock_gettime");
+            exit(EXIT_FAILURE);
+        }
+        pid = fork();
+        if (pid < 0)
+        {
+            wait(&status);
+        }
+        else if (pid == 0)
+        { // child
+
+            sleep(1);
+            execvp(argument_list[0], argument_list); //execvp is now used instead of execlp
+
+            exit(EXIT_SUCCESS);
+        }
+        else if (pid > 0)
+        {
+            wpid = wait(&status);
+            if (wpid == -1)
+            {
+                perror("wait error:");
+                exit(1);
+            }
+
+            if (clock_gettime(CLOCK_REALTIME, &stop) == -1) // end of time
+            {
+                perror("clock_gettime");
+                exit(EXIT_FAILURE);
+            }
+            accum = (stop.tv_sec - start.tv_sec) + ((stop.tv_nsec - start.tv_nsec) / NANOSECOND);
+
+            if (WIFEXITED(status)) // normal exit
+            {
+                status_number = WEXITSTATUS(status);
+                sprintf(string_status_number, "[exit:%i", status_number);
+            }
+            else // singal exit
+            {
+                status_number = WTERMSIG(status);
+                sprintf(string_status_number, "[sign:%i ", status_number);
+            }
+
+            sprintf(string_accum, "|%lfs] %% ", accum);
+            // write(STDOUT_FILENO, string_accum, strlen(string_accum));
+
+            sprintf(enseash2, "enseash");
+            strcat(enseash2, string_status_number);
+            strcat(enseash2, string_accum);
+
+            write(STDOUT_FILENO, enseash2, strlen(enseash2));
+            sprintf(enseash2, " ");
+        }
+    }
+
+    // exit(1);
+}
+
+
 
 int main()
 {
@@ -253,9 +370,7 @@ int main()
     //q2();
     //q3();
     //q4();
-    q5();
+    //q5();
+    q6();
     
 }
-
-
-
