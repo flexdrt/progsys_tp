@@ -29,7 +29,7 @@ L'intérêt de cette fonctionnalité est dual : créer une atmosphère convivial
 
 Le micro shell prend en charge l'exécution de commandes simples sans argument. Il lit la commande saisie, l'exécute, puis retourne au prompt  pour attendre la commande suivante.
 
-![screen _q7_shell ](/home/vincent/Documents/tp synthese/tp1/progsys_tp/maj_tp1/q1/screen _q7_shell .png)
+![screen _q7_shell ](maj_tp1/q1/screen _q7_shell .png)
 
 
 
