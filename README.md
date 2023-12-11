@@ -55,7 +55,7 @@ Le shell affiche le code de retour (ou le signal) de la commande  précédente d
 
 Le micro shell mesure le temps d'exécution de chaque commande à l'aide  de l'appel clock_gettime, fournissant des informations sur la durée de  l'exécution dans le prompt.
 
-![screen_q5_shell](/home/vincent/Documents/tp synthese/tp1/progsys_tp/maj_tp1/q5/screen_q5_shell.png)
+![screen_q5_shell](maj_tp1/q5/screen_q5_shell.png)
 
 
 
@@ -63,7 +63,7 @@ Le micro shell mesure le temps d'exécution de chaque commande à l'aide  de l'a
 
 Le micro shell prend en charge l'exécution de commandes complexes avec  des arguments, offrant ainsi une flexibilité accrue à l'utilisateur.
 
-![screen_q6_shell](/home/vincent/Documents/tp synthese/tp1/progsys_tp/maj_tp1/q6/screen_q6_shell.png)
+![screen_q6_shell](maj_tp1/q6/screen_q6_shell.png)
 
 
 
@@ -73,7 +73,7 @@ Le micro shell permet la gestion des redirections vers stdin et stdout  avec les
 
 Ci-dessous je teste la redirection sur un fichier qui contient 8 lignes avec la commande 'wc -l < file.txt' :
 
-![screen _q7_shell ](/home/vincent/Documents/tp synthese/tp1/progsys_tp/maj_tp1/q7/screen _q7_shell .png)
+![screen _q7_shell ](maj_tp1/q7/screen_q7_shell.png)
 
 
 
